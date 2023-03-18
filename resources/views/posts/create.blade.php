@@ -9,7 +9,7 @@
 
   <div class="form-group">
     <label for="exampleFormControlInput1">Post Title</label>
-    <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+    <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
   </div>
 
 

@@ -71,13 +71,12 @@ class PostsController extends Controller{
     }
 
     public function store (Request $request){
-       var_dump( $request->all());
+
        return redirect()->route('posts.store');
        
     }
 
     public function update (Request $request){
-        var_dump( $request->all());
         return redirect()->route('posts.store');
         
      }
