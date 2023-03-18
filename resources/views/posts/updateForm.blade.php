@@ -4,12 +4,13 @@
 @section('title') Update Post @endsection
 
 @section('content')
-<form method="post" action="{{route('posts.index')}}">
+<form method="post" action="{{route('posts.update', $post['id'])}}">
 {{ csrf_field() }} 
+@method('put')
 
   <div class="form-group">
     <label for="exampleFormControlInput1">Post Title</label>
-    <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{$post['title']}}">
+    <input name="email" type="text" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{$post['title']}}">
   </div>
 
 
