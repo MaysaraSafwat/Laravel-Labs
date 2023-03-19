@@ -104,7 +104,7 @@
                     @method('delete')
                     <button type="submit" class="btn btn-danger">Delete</button>
                     </form> -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{$post->id}}" data-bs-whatever="@mdo">Delete</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{$post->id}}" data-bs-whatever="@mdo">Delete</button>
                     <!-- Modal -->
                 <div class="modal fade" id="exampleModal{{$post->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -130,10 +130,11 @@
                 </td>
             </tr>
         @endforeach
-
-
-
+        
+       
         </tbody>
     </table>
-
+     <div class="container">
+     {{$posts->links('pagination::bootstrap-4')}}
+    </div> 
 @endsection

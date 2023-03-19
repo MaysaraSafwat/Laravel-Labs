@@ -11,10 +11,13 @@ class PostsController extends Controller{
    //get all posts
     public function index()
     {
-         $allPosts = Post::all(); //select * from posts
-         //dd($allPosts);
+        //  $allPosts = Post::all(); //select * from posts
+        //  //dd($allPosts);
 
-        return view('posts.index', ['posts' => $allPosts]);
+        // return view('posts.index', ['posts' => $allPosts]);
+        $paginatedPosts = Post::paginate(5);
+        return view('posts.index', ['posts' => $paginatedPosts]);
+       
     }
 
    //get post by id
@@ -73,7 +76,7 @@ class PostsController extends Controller{
      public function delete ($id){
         $post = Post::find($id);
         $post->delete();
-        
+
         return to_route('posts.index');
 
      }
