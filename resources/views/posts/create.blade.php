@@ -19,8 +19,12 @@
   </div>
 
   <div class="form-group">
-    <label for="exampleFormControlInput1">Post Creator</label>
-    <input name="creator" type="text" class="form-control" id="exampleFormControlInput2" placeholder="">
+  <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
+            <select name="post_creator" class="form-control">
+                @foreach($users as $user)
+                    <option value="{{$user->id}}">{{$user->name}}</option>
+                @endforeach
+            </select>
   </div>
 
   <button class="btn btn-success" type="submit">Create</button>
