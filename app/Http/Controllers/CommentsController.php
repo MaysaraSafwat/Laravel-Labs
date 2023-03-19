@@ -25,6 +25,41 @@ class CommentsController extends Controller
        $post = Post::where('id', $id)->first();
         return to_route('posts.show', ['post'=>$post]);
    }
+   public function edit($id){
+        
+    $comment = Comment::where('id', $id)->first(); 
+    
+    return view('comments.editComment',  ['comment' => $comment]);
+}
+
+
+   public function update (Request $request, $id){
+    $title = $request->title;
+    $body = $request->body;
+   
+
+    $comment = Comment::find($id);
+    $postID = $comment->post_id;
+    $comment->title= $title;
+    $comment->body= $body;
+
+    
+     
+    $comment->save();
+    $post = Post::where('id', $postID)->first();
+    return to_route('posts.show' , ['post'=>$post]);
+  
+ }
+
+ public function destroy ($id){
+    $comment = Comment::find($id);
+    $postID = $comment->post_id;
+    $comment->delete();
+    $post = Post::where('id', $postID)->first();
+
+    return to_route('posts.show' , ['post'=>$post]);
+
+ }
 }
 
 

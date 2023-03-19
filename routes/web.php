@@ -26,3 +26,6 @@ Route::put('/update/{post}', [PostsController::class, 'update'])->name('posts.up
 Route::delete('/posts/{post}', [PostsController::class, 'delete'])->name('posts.delete');
 
 Route::post('/comments/{post}', [CommentsController::class, 'store'])->name('comments.store');
+Route::get('/comments/{post}/editForm', [CommentsController::class,"edit"])->name("comments.edit");
+Route::put('/comments/{post}', [CommentsController::class,"update"])->name("comments.update");
+Route::delete('/comments/{post}', [CommentsController::class,"destroy"])->name("comments.delete");
