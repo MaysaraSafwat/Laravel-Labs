@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use function Ramsey\Uuid\v1;
 use App\Models\Post;
@@ -24,9 +25,9 @@ class PostsController extends Controller{
     
     public function show($id)
     {
-
     $post = Post::where('id', $id)->first(); //Post model object ... select * from posts where id = 1 limit 1;
-    return view('posts.show', ['post' => $post]);
+    $comments = Comment::where('post_id', $id)->get();// get all comments that have the this post's id
+    return view('posts.show', ['post' => $post, 'comments'=> $comments]);
     }
 
     //passing user data to create post form

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\CommentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,3 +24,5 @@ Route::get('/update/{post}', [PostsController::class, 'updateForm'])->name('post
 Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
 Route::put('/update/{post}', [PostsController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{post}', [PostsController::class, 'delete'])->name('posts.delete');
+
+Route::post('/comments/{post}', [CommentsController::class, 'store'])->name('comments.store');
