@@ -21,7 +21,7 @@
                 @if($post->user)
                 <div class="card-body">
                 <h5 class="card-title"><b>Name: {{$post->user->name}}</b></h5>
-                <p class="card-text"><b>Email:</b> {{$post->user->name}} </p>
+                <p class="card-text"><b>Email:</b> {{$post->user->email}} </p>
                  </div>
                 @else
                 <div class="card-body">
