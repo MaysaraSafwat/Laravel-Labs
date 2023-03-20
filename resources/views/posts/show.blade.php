@@ -8,8 +8,9 @@
             Post Info
         </div>
         <div class="card-body">
-            <h5 class="card-title">Title: {{$post['title']}}</h5>
-            <p class="card-text">Description: {{$post['description']}}</p>
+            <h5 class="card-title"><b>Title: </b> {{$post['title']}}</h5>
+            <p class="card-text"><b>Description:</b> {{$post['description']}}</p>
+            <p class="card-text"><b>Description:</b> {{\Carbon\Carbon::parse($post->created_at)->format('Y-m-d');}}</p>
         </div>
     </div>
 
@@ -17,10 +18,17 @@
         <div class="card-header">
             Post Creator Info
         </div>
-        <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
+                @if($post->user)
+                <div class="card-body">
+                <h5 class="card-title"><b>Name: {{$post->user->name}}</b></h5>
+                <p class="card-text"><b>Email:</b> {{$post->user->name}} </p>
+                 </div>
+                @else
+                <div class="card-body">
+                <h5 class="card-title" style="color: red;">creator not found</h5>
+                </div>                
+                @endif
+       
     </div>
 
     <!-- -----------COMMENT SECTION------------- -->

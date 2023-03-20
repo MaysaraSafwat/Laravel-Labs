@@ -95,7 +95,7 @@
                 @else
                 <td>Not Found</td>
                 @endif
-                <td>{{$post->created_at}}</td>
+                <td>{{\Carbon\Carbon::parse($post->created_at)->format('Y-m-d');}}</td>
                 <td>
                     <a href="{{route('posts.show', $post->id)}}" class="btn btn-info">View</a>
                     <a href="{{route('posts.updateForm', $post->id)}}" class="btn btn-primary">Edit</a>
