@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use function Ramsey\Uuid\v1;
@@ -45,8 +46,9 @@ class PostsController extends Controller{
         return view('posts.updateForm',  ['post' => $post]);
     }
     // create new post record add to database
-    public function store (Request $request){
-      
+    public function store (StorePostRequest $request){
+         
+       
          $title = $request->title;
          $description = $request->description;
          $postCreator = $request->post_creator;
