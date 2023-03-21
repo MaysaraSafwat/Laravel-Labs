@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use function Ramsey\Uuid\v1;
@@ -63,7 +64,7 @@ class PostsController extends Controller{
     }
 
     //update record
-     public function update (Request $request, $id){
+     public function update (UpdatePostRequest $request, $id){
         $title = $request->title;
         $description = $request->description;
 
