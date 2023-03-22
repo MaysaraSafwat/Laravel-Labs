@@ -13,6 +13,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Title</th>
+            <th scope="col">Slug-form</th>
             <th scope="col">Posted By</th>
             <th scope="col">Created At</th>
             <th scope="col">Actions</th>
@@ -25,6 +26,12 @@
             <tr>
                 <td>{{$post->id}}</td>
                 <td>{{$post->title}}</td>
+                @if($post->slug)
+                <td>{{$post->slug}}</td>
+                @else
+                <td>Not found</td>
+                @endif
+                
                 @if($post->user)
                 <td>{{$post->user->name}}</td>
                 @else
