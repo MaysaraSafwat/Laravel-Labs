@@ -48,15 +48,16 @@ class PostsController extends Controller{
     }
     // create new post record add to database
     public function store (StorePostRequest $request){
-         
        
          $title = $request->title;
          $description = $request->description;
          $postCreator = $request->post_creator;
+         $path = $request->image->store('PostsImages');
 
          Post::create([
             'title' => $title,
             'description' => $description,
+            'image'=>$path,
             'user_id' => $postCreator,
         ]);
 

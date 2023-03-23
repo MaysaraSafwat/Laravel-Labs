@@ -24,6 +24,7 @@ class UpdatePostRequest extends FormRequest
         return [
                 'title' => ['required', 'min:3'],
                 'description' => ['required', 'min:10'],
+                'image' => ['required','mimes:jpg,png'],
                 'post_id' => ['exists:posts,post_id']
           
         ];

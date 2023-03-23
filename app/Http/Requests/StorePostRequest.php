@@ -33,6 +33,7 @@ class StorePostRequest extends FormRequest
         return [
             'title.required'=> 'Please fill the title',
             'description.required'=> "Please fill the description",
+            'image' => ['required','mimes:jpg,png'],
             'post_id' => ['exists:posts,post_id']
         ];
     }
