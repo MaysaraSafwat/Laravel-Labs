@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use function Ramsey\Uuid\v1;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller{
    //get all posts
@@ -52,7 +53,14 @@ class PostsController extends Controller{
          $title = $request->title;
          $description = $request->description;
          $postCreator = $request->post_creator;
-         $path = $request->image->store('PostsImages');
+
+         if($request->hasFile("image")){
+            $image = $request->file('image');
+            $filename = $image->getClientOriginalName();
+            $path = Storage::putFileAs('posts', $image, $filename);
+               
+         }
+       
 
          Post::create([
             'title' => $title,
@@ -70,9 +78,17 @@ class PostsController extends Controller{
         $description = $request->description;
 
         $post = Post::find($id);
+        Storage::delete($post->image);
+        if($request->hasFile("image")){
+         $image = $request->file('image');
+         $filename = $image->getClientOriginalName();
+         $path = Storage::putFileAs('posts', $image, $filename);
+         $post->image = $path;      
+      }
  
         $post->title= $title;
         $post->description = $description;
+        
          
         $post->save();
         return to_route('posts.index');
@@ -80,6 +96,7 @@ class PostsController extends Controller{
         
      public function delete ($id){
         $post = Post::find($id);
+        Storage::delete($post->image);
         $post->delete();
 
         return to_route('posts.index');

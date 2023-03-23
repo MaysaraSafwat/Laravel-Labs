@@ -23,7 +23,8 @@ class StorePostRequest extends FormRequest
     {
         return [
                 'title' => ['required', 'min:3','unique:App\Models\Post,title'],
-                'description' => ['required', 'min:10']
+                'description' => ['required', 'min:10'],
+                'image' => ['required','mimes:jpg,png'],
            
           
         ];
@@ -33,7 +34,6 @@ class StorePostRequest extends FormRequest
         return [
             'title.required'=> 'Please fill the title',
             'description.required'=> "Please fill the description",
-            'image' => ['required','mimes:jpg,png'],
             'post_id' => ['exists:posts,post_id']
         ];
     }
