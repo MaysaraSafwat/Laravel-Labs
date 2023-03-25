@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +47,32 @@ Route::group(['middleware'=>['auth']],function(){
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+ 
+Route::get('/auth/redirect', function () {
+
+    return Socialite::driver('github')->redirect();
+})->name('login.github');
+ 
+Route::get('/auth/callback', function () {
+  $githubUser = Socialite::driver('github')->user();
+  $user = User::updateOrCreate([
+      'github_id' => $githubUser->id,
+  ], [
+      'id' => $githubUser->id,
+      'name' => $githubUser->nickname,
+      'email' => $githubUser->email,
+      'password'=>"789456123",
+      'github_token' => $githubUser->token,
+      'github_refresh_token' => $githubUser->refreshToken,
+  ]);
+
+  Auth::login($user);
+
+
+ dd($user);
+
+
+});
