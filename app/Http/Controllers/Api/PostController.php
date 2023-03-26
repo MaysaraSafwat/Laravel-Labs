@@ -12,7 +12,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $allPosts = Post::all(); //select * from posts
+        $allPosts=Post::with('user')->paginate(5);
 
         return PostResource::collection($allPosts);
         
