@@ -58,11 +58,11 @@
                                 </button>
 
                                 
-                                <a href="#" class="btn btn-dark">
+                                <a href="{{ route('login.github') }}" class="btn btn-dark">
                                     {{ __('Login With Github') }}
                                 </a>
 
-                                <a href="#" class="btn btn-success">
+                                <a href="{{ route('login.google') }}" class="btn btn-success">
                                     {{ __('Login With Google') }}
                                 </a>
 

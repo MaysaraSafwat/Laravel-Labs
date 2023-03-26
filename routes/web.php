@@ -7,16 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,7 +28,7 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('/comments/{post}/editForm', [CommentsController::class,"edit"])->name("comments.edit");
     Route::put('/comments/{post}', [CommentsController::class,"update"])->name("comments.update");
     Route::delete('/comments/{post}', [CommentsController::class,"destroy"])->name("comments.delete");
-  
+
   
   });
 
@@ -49,7 +40,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-
+//----------------------------------------LOGIN WITH GITHUB-----------------------
  
 Route::get('/auth/redirect', function () {
 
@@ -74,5 +65,25 @@ Route::get('/auth/callback', function () {
 
  dd($user);
 
+
+});
+//-----------------------------------------LOGIN WITH GOOGLE---------------------------
+Route::get('/auth/google/redirect', function (){
+  return Socialite::driver('google')->redirect();
+})->name('login.google');
+
+
+Route::get('/auth/google/callback',function (){
+ $googleUser = Socialite::driver('github')->user();
+  $user = User::updateOrCreate([
+      'google_id' => $googleUser->id,
+  ], [
+      'id' => $googleUser->id,
+      'name' => $googleUser->nickname,
+      'email' => $googleUser->email,
+      'password'=>"789456123",
+  ]);
+  Auth::login($user);
+  dd($user);
 
 });
